@@ -15,7 +15,7 @@ def main():
         reader = csv.DictReader(file)
         str = reader.fieldnames[1:]
         for word in reader:
-            Database.append()
+            Database.append(word)
 
     
     # TODO: Read DNA sequence file into a variable
@@ -26,8 +26,14 @@ def main():
     for str_name in str:
         counts[str_name] = longest_match(sequence, str_name)
     # TODO: Check database for matching profiles
-
-    return
+    for person in Database:
+        match = True
+        if person[str_name] != counts[str_name]:
+            match = False
+            break
+        if match:
+            return
+        
 
 
 def longest_match(sequence, subsequence):
@@ -40,7 +46,6 @@ def longest_match(sequence, subsequence):
 
     # Check each character in sequence for most consecutive runs of subsequence
     for i in range(sequence_length):
-
         # Initialize count of consecutive runs
         count = 0
 
